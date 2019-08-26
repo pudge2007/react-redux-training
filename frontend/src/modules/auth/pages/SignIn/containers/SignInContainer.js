@@ -7,7 +7,7 @@ import SignInModal from "../components/SignInModal";
 import * as modalActionCreators from "modules/common/ModalDialog/actions";
 import * as formActionCreators from "../actions";
 import { SIGN_IN_MODAL } from "../constants";
-import { getIsPending } from "modules/auth/selectors";
+import { getIsPending } from "modules/api/selectors";
 
 class SignInContainer extends Component {
   toggleModal = () => {
@@ -43,7 +43,7 @@ class SignInContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    isPending: getIsPending(state)
+    isPending: getIsPending(state, formActionCreators.signInRequest)
   };
 };
 

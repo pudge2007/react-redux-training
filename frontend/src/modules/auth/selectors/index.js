@@ -1,5 +1,3 @@
-export const getIsLogin = (state) => !!Object.keys(state.auth.user).length;
+export const getIsAuthenticated = (state) => state.auth.isAuthenticated;
 
 export const getUser = (state) => state.auth.user;
-
-export const getIsPending = (state) => state.auth.isPending;

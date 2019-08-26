@@ -4,7 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { styles } from "./styles";
 
-const SignOutMenu = ({ onLogout }) => {
+const LogoutMenu = ({ onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const openMenu = event => {
@@ -37,4 +37,4 @@ const SignOutMenu = ({ onLogout }) => {
   );
 };
 
-export default SignOutMenu;
+export default LogoutMenu;

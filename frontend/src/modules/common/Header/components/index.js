@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import SignIn from "modules/auth";
-import SignOut from "modules/auth/containers/SignOutContainer";
-import { getIsLogin } from "modules/auth/selectors";
+import SignIn from "modules/auth/pages/SignIn";
+import Logout from "modules/auth/components/LogoutMenu";
+import { getIsAuthenticated } from "modules/auth/selectors";
+import { logout } from "modules/auth/actions";
 
 class Header extends Component {
+  onLogout = () => {
+    this.props.logout();
+  };
+
   render() {
-    const { isLogin } = this.props;
+    const { isAuthenticated } = this.props;
 
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -35,7 +41,7 @@ class Header extends Component {
           </ul>
         </div>
 
-        {isLogin ? <SignOut /> : <SignIn />}
+        {isAuthenticated ? <Logout onLogout={this.onLogout} /> : <SignIn />}
       </nav>
     );
   }
@@ -43,8 +49,17 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLogin: getIsLogin(state)
+    isAuthenticated: getIsAuthenticated(state)
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: bindActionCreators(logout, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

@@ -32,7 +32,7 @@ const reducer = handleActions(
     [actionCreators.removeNotification](state, { payload }) {
       return state.filter(n => n.key !== payload);
     },
-    [actionCreators.removeAllNotifications](state, { payload }) {
+    [actionCreators.removeAllNotifications](state) {
       return state.map(n => ({ ...n, dismissed: true }));
     }
   },

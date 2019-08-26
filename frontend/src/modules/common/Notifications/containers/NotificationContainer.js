@@ -32,7 +32,9 @@ class NotificationContainer extends Component {
       }
 
       if (notExists) continue;
-      notExists = notExists || !currentSnacks.filter(({ key }) => newSnack.key === key).length;
+      notExists =
+        notExists ||
+        !currentSnacks.filter(({ key }) => newSnack.key === key).length;
     }
     return notExists;
   }
