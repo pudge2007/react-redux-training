@@ -9,7 +9,8 @@ import { configureStore, history } from "store/configureStore";
 import PrivateRoute from "modules/common/PrivateRoute";
 import Notifications from "modules/common/Notifications";
 import Header from "modules/common/Header";
-import FilmsList from "modules/films";
+import FilmsList from "modules/films/pages/FilmsList";
+import FilmPage from "modules/films/pages/FilmPage";
 import UserAccount from "modules/userAccount";
 import Categories from "modules/categories";
 import Ratings from "modules/ratings";
@@ -36,6 +37,7 @@ const App = () => {
 
             <Switch>
               <Route exact path="/" component={FilmsList} />
+              <Route path="/film/:id" component={FilmPage} />
               <Route path="/categories" component={Categories} />
               <Route path="/ratings" component={Ratings} />
               <PrivateRoute path="/account" component={UserAccount} />

@@ -3,7 +3,7 @@ import camelCase from "lodash/camelCase";
 
 import * as notificationActionCreators from "modules/common/Notifications/actions";
 import * as calls from "../calls";
-import { setIsFetching, removeIsFetching } from "../actions";
+import { removeIsPending, setIsPending } from "../actions";
 
 const startPostfix = "_REQUEST";
 const successPostfix = "_SUCCESS";
@@ -15,7 +15,7 @@ function* sendRequest(action) {
     throw new Error(`no api method for action ${action.type}`);
   }
 
-  yield put(setIsFetching(action.type));
+  yield put(setIsPending(action.type));
 
   try {
     let response = yield call(callMethod, action.payload);
@@ -53,7 +53,7 @@ function* requestEnded(action) {
     ? successPostfix
     : failPostfix;
   const actionType = action.type.replace(endPostfix, startPostfix);
-  yield put(removeIsFetching(actionType));
+  yield put(removeIsPending(actionType));
 }
 
 const isApiCallAction = action => {

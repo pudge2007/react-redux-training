@@ -4,7 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { styles } from "./styles";
 
-const LogoutMenu = ({ onLogout }) => {
+const LogoutMenu = ({user, onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const openMenu = event => {
@@ -17,7 +17,7 @@ const LogoutMenu = ({ onLogout }) => {
 
   return (
     <div style={styles.wrapper}>
-      <p style={styles.name}>Boris Ivchenko</p>
+      <p style={styles.name}>{user.lastName + ' ' + user.firstName}</p>
       <AccountCircle style={styles.icon} onClick={openMenu} />
       <Menu
         anchorEl={anchorEl}

@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 
 import SignIn from "modules/auth/pages/SignIn";
 import Logout from "modules/auth/components/LogoutMenu";
-import { getIsAuthenticated } from "modules/auth/selectors";
+import { getIsAuthenticated, getUser } from "modules/auth/selectors";
 import { logout } from "modules/auth/actions";
 
 class Header extends Component {
@@ -14,7 +14,7 @@ class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, user } = this.props;
 
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -41,7 +41,11 @@ class Header extends Component {
           </ul>
         </div>
 
-        {isAuthenticated ? <Logout onLogout={this.onLogout} /> : <SignIn />}
+        {isAuthenticated ? (
+          <Logout user={user} onLogout={this.onLogout} />
+        ) : (
+          <SignIn />
+        )}
       </nav>
     );
   }
@@ -49,6 +53,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: getUser(state),
     isAuthenticated: getIsAuthenticated(state)
   };
 };

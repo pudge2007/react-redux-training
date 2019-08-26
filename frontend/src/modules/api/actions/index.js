@@ -1,4 +1,4 @@
 import { createAction } from "redux-actions";
 
-export const setIsFetching = createAction("SET_IS_FETCHING");
-export const removeIsFetching = createAction("REMOVE_IS_FETCHING");
+export const setIsPending = createAction("SET_IS_PENDING");
+export const removeIsPending = createAction("REMOVE_IS_PENDING");

@@ -10,6 +10,6 @@ module.exports = (req, res, next) => {
   } else if (req.method == "POST" && req.path == "/logout") {
       res.status(200).json({});
   } else {
-    next();
+    setTimeout(() => next(), 1000);
   }
 };

@@ -7,8 +7,8 @@ const defaultState = null;
 
 export default handleActions(
   {
-    [signInActionCreators.signInSuccess](state, { payload }) {
-      return payload;
+    [signInActionCreators.signInSuccess](state, action) {
+      return action.response.data;
     },
     [actionCreators.logout]() {
       return defaultState;
