@@ -1,9 +1,5 @@
 import api from "../index";
 
-export const signInRequest = payload => {
-  return api.post("/signin", payload);
-};
-
-export const logoutRequest = () => {
-  return api.post("/logout");
+export const signIn = payload => {
+  return api.post("/users/sign-in", payload);
 };

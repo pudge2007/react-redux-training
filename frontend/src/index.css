@@ -1,4 +1,10 @@
 body {
   margin: 0;
-  font-family: 'Roboto';
+  font-family: "Roboto";
+  background-color: #f8fdff;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
 }

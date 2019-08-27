@@ -10,15 +10,16 @@ const successPostfix = "_SUCCESS";
 const failPostfix = "_FAIL";
 
 function* sendRequest(action) {
-  let callMethod = calls[camelCase(action.type)];
-  if (!callMethod) {
-    throw new Error(`no api method for action ${action.type}`);
+  const callMethod = camelCase((action.type).replace(startPostfix, ""))
+  let request = calls[callMethod];
+  if (!request) {
+    throw new Error(`no api method for action ${callMethod}`);
   }
 
   yield put(setIsPending(action.type));
 
   try {
-    let response = yield call(callMethod, action.payload);
+    let response = yield call(request, action.payload);
     yield put(notificationActionCreators.removeAllNotifications());
     yield put(createSuccessAction(action, response));
   } catch (error) {

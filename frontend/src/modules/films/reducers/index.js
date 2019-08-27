@@ -1,16 +1,11 @@
-import { handleActions } from "redux-actions";
+import { combineReducers } from "redux";
 
-import * as actionCreators from "../pages/FilmsList/actions";
+import list from "../pages/FilmsList/reducers";
+import byId from "../pages/FilmPage/reducers";
 
-const defaultState = [];
-
-const reducer = handleActions(
-  {
-    [actionCreators.getFilmsSuccess](state, action) {
-      return action.response.data;
-    }
-  },
-  defaultState
-);
+const reducer = combineReducers({
+  list,
+  byId
+});
 
 export default reducer;

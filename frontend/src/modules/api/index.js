@@ -4,7 +4,7 @@ import { errorNotification } from "modules/common/Notifications/actions";
 import { store } from "components/App";
 
 let config = {
-  baseURL: "http://localhost:5000/",
+  baseURL: "http://localhost:5000/api/",
   timeout: 100000,
   headers: {
     Accept: "application/json",

@@ -6,7 +6,7 @@ const FilmsList = ({ films, isPending }) => {
   return (
     <Fragment>
       <h1 style={{ margin: 20 }}>Список фильмов</h1>
-      {isPending && <LinearProgress variant="query" />}
+      {isPending && <LinearProgress color="secondary" variant="query" />}
       <ul className="list-group">
         {films.map(film => (
           <FilmsListItem
