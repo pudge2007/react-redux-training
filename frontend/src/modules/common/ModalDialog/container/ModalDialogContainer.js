@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import ModalDialog from "../components";
+import ModalDialog from "../component";
 import * as actionCreators from "../actions";
 import { isOpen } from "../selectors";
 

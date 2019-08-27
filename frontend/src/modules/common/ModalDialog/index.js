@@ -1,1 +1,1 @@
-export { default } from './containers/ModalDialogContainer';
+export { default } from './container/ModalDialogContainer';

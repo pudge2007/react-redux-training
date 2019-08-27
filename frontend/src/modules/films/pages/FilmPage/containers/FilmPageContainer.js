@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Film from "../components/Film";
 import * as actionCreators from "../actions";
 import { getFilm, getFilmId } from "../../../selectors";
 import { getIsPending } from "modules/api/selectors";
+import Layout from "modules/common/Layout";
 
 class FilmPageContainer extends Component {
   onRatingChange = (event, value) => {
@@ -28,16 +28,9 @@ class FilmPageContainer extends Component {
   render() {
     const { film, isPending, isPendingRating } = this.props;
     return (
-      <Fragment>
-        {((!film && isPending) || isPendingRating) && (
-          <LinearProgress color="secondary" variant="query" />
-        )}
-        {film && !isPending ? (
-          <Film {...this.props} onRatingChange={this.onRatingChange} />
-        ) : (
-          <h1>Ничего не найдено</h1>
-        )}
-      </Fragment>
+      <Layout isPending={isPending || isPendingRating}>
+        {film && <Film {...this.props} onRatingChange={this.onRatingChange} />}
+      </Layout>
     );
   }
 }

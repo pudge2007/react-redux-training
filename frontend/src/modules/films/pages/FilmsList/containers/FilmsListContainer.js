@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import Layout from "modules/common/Layout";
 import FilmsList from "../components/FilmsList";
 import * as actionCreators from "../actions";
 import { getFilms } from "../../../selectors";
@@ -15,11 +16,12 @@ class FilmsListContainer extends Component {
   }
 
   render() {
-    const props = {
-      films: this.props.films,
-      isPending: this.props.isPending
-    };
-    return <FilmsList {...props} />;
+    const { films, isPending } = this.props;
+    return (
+      <Layout isPending={isPending}>
+        {!!films.length && <FilmsList films={films} />}
+      </Layout>
+    );
   }
 }
 
