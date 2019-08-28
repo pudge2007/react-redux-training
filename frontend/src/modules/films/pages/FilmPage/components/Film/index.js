@@ -1,9 +1,9 @@
 import React from "react";
-import Rating from "@material-ui/lab/Rating";
 
+import Rating from "../../../../components/Raiting";
 import { styles } from "./styles";
 
-const Film = ({ film, onRatingChange, isPendingRating }) => {
+const Film = ({ film }) => {
   console.log(film);
   return (
     <div style={styles.wrapper}>
@@ -15,11 +15,7 @@ const Film = ({ film, onRatingChange, isPendingRating }) => {
           <div className="col-9">
             <div style={styles.titleWrapper}>
               <h1 style={styles.title}>{film.title}</h1>
-              <Rating
-                disabled={isPendingRating}
-                value={film.rating}
-                onChange={onRatingChange}
-              />
+              <Rating value={film.rating} />
             </div>
             <p>{film.description}</p>
           </div>

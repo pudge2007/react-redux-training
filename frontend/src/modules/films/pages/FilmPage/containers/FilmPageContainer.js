@@ -4,18 +4,11 @@ import { bindActionCreators } from "redux";
 
 import Film from "../components/Film";
 import * as actionCreators from "../actions";
-import { getFilm, getFilmId } from "../../../selectors";
+import { getFilm } from "../../../selectors";
 import { getIsPending } from "modules/api/selectors";
 import Layout from "modules/common/Layout";
 
 class FilmPageContainer extends Component {
-  onRatingChange = (event, value) => {
-    this.props.actions.setFilmRatingRequest({
-      film_id: this.props.filmId,
-      rating: value
-    });
-  };
-
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.actions.getFilmByIdRequest(id);
@@ -26,10 +19,10 @@ class FilmPageContainer extends Component {
   }
 
   render() {
-    const { film, isPending, isPendingRating } = this.props;
+    const { film, isPending } = this.props;
     return (
-      <Layout isPending={isPending || isPendingRating}>
-        {film && <Film {...this.props} onRatingChange={this.onRatingChange} />}
+      <Layout isPending={isPending}>
+        {film && <Film film={film} />}
       </Layout>
     );
   }
@@ -38,9 +31,7 @@ class FilmPageContainer extends Component {
 const mapStateToProps = state => {
   return {
     film: getFilm(state),
-    filmId: getFilmId(state),
-    isPending: getIsPending(state, actionCreators.getFilmByIdRequest),
-    isPendingRating: getIsPending(state, actionCreators.setFilmRatingRequest)
+    isPending: getIsPending(state, actionCreators.getFilmByIdRequest)
   };
 };
 

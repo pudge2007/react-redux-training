@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 
 import * as actionCreators from "../actions";
+import * as ratingActionCreators from '../../../components/Raiting/actions';
 
 const defaultState = null;
 
@@ -9,7 +10,7 @@ const reducer = handleActions(
     [actionCreators.getFilmByIdSuccess](state, action) {
       return action.response.data || null;
     },
-    [actionCreators.setFilmRatingSuccess](state, action) {
+    [ratingActionCreators.setFilmRatingSuccess](state, action) {
       return { ...state, ...{ rating: action.response.data } };
     },
     [actionCreators.removeFilmState]() {
