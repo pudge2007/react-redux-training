@@ -28,7 +28,7 @@ class RaitingContainer extends Component {
   render() {
     const { isPending, value } = this.props;
     return (
-      <Rating disabled={isPending} value={value} onChange={this.onChange} />
+      <Rating disabled={isPending} value={value / 2} onChange={this.onChange} />
     );
   }
 }

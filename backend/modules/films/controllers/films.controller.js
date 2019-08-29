@@ -1,5 +1,4 @@
 const Film = require("../models/film.model");
-const RatingCtrl = require("../controllers/rating.controller");
 
 const sendErrorMessage = (err, res) =>
   res.status(500).json({
@@ -25,8 +24,6 @@ exports.getFilmById = async (req, res) => {
     if (!film) {
       return res.status(404).json({ message: "Film not found with id " + id });
     } else {
-      const filmRating = await RatingCtrl.getFilmRatings(id);
-      film.rating = filmRating;
       res.json(film);
     }
   } catch (err) {

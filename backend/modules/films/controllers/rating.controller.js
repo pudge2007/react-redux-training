@@ -1,4 +1,5 @@
 const Rating = require("../models/rating.model");
+const Film = require("../models/film.model");
 
 const sendErrorMessage = (err, res) =>
   res.status(500).json({
@@ -11,7 +12,7 @@ const ratingAverage = ratings => {
   ).toFixed(2);
 };
 
-exports.getFilmRatings = async film_id => {
+const getAverageFilmRatings = async film_id => {
   try {
     const ratings = await Rating.find({ film_id }, "rating");
     return ratingAverage(ratings);
@@ -34,7 +35,7 @@ exports.setRating = async (req, res) => {
   const newRating = new Rating({
     film_id,
     user_id,
-    rating
+    rating: rating * 2
   });
 
   try {
@@ -46,7 +47,10 @@ exports.setRating = async (req, res) => {
       });
     } else {
       await newRating.save();
-      const filmRating = await module.exports.getFilmRatings(film_id);
+      const filmRating = await getAverageFilmRatings(film_id);
+
+      await Film.updateOne({ id: film_id }, {rating: filmRating});
+
       res.json(filmRating);
     }
   } catch (err) {
