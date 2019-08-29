@@ -1,6 +1,12 @@
 import api from "../index";
 
-export const getFilms = () => api.get("/films");
+export const getFilms = search => {
+  return api.get("/films", {
+    params: {
+      ...(search ? { search: search } : {})
+    }
+  });
+};
 
 export const getFilmById = id => api.get("/films/" + id);
 

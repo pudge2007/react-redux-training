@@ -1,5 +1,5 @@
 const Film = require("../models/film.model");
-const RatingCtrl = require('../controllers/rating.controller');
+const RatingCtrl = require("../controllers/rating.controller");
 
 const sendErrorMessage = (err, res) =>
   res.status(500).json({
@@ -7,8 +7,10 @@ const sendErrorMessage = (err, res) =>
   });
 
 exports.getFilms = async (req, res) => {
+  const { search } = req.query;
+  const query = search ? { title: { $regex: search, $options: "i" } } : {};
   try {
-    const films = await Film.find();
+    const films = await Film.find(query);
     res.json(films);
   } catch (err) {
     return sendErrorMessage(err, res);
@@ -27,6 +29,18 @@ exports.getFilmById = async (req, res) => {
       film.rating = filmRating;
       res.json(film);
     }
+  } catch (err) {
+    return sendErrorMessage(err, res);
+  }
+};
+
+exports.addFilm = async (req, res) => {
+  const film = req.body;
+  const newFilm = new Film(film);
+
+  try {
+    await newFilm.save();
+    res.json("Film added!");
   } catch (err) {
     return sendErrorMessage(err, res);
   }

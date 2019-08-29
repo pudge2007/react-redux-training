@@ -1,25 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { debounce } from "lodash";
 
 import Layout from "modules/common/Layout";
 import FilmsList from "../components/FilmsList";
 import * as actionCreators from "../actions";
-import { getFilms } from "../../../selectors";
+import { getFilms, getSearchText } from "../../../selectors";
 import { getIsPending } from "modules/api/selectors";
+import Search from "../components/Search";
 
 class FilmsListContainer extends Component {
+  onChange = e => {
+    const { value } = e.target;
+    this.props.actions.setSearchText(value);
+    this.searchFilms(value);
+  };
+
+  searchFilms = debounce(value => {
+    this.props.actions.getFilmsRequest(value);
+  }, 500);
+
   componentDidMount() {
-    if (!this.props.films.length) {
-      this.props.getFilms();
-    }
+    const { actions, searchText } = this.props;
+    actions.getFilmsRequest(searchText);
   }
 
   render() {
-    const { films, isPending } = this.props;
+    const { films, isPending, searchText } = this.props;
     return (
       <Layout isPending={isPending}>
-        {!!films.length && <FilmsList films={films} />}
+        <Search onChange={this.onChange} value={searchText} />
+        <FilmsList films={films} />
       </Layout>
     );
   }
@@ -28,13 +40,14 @@ class FilmsListContainer extends Component {
 const mapStateToProps = state => {
   return {
     films: getFilms(state),
+    searchText: getSearchText(state),
     isPending: getIsPending(state, actionCreators.getFilmsRequest)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFilms: bindActionCreators(actionCreators.getFilmsRequest, dispatch)
+    actions: bindActionCreators(actionCreators, dispatch)
   };
 };
 

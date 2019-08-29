@@ -1,23 +1,22 @@
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import FilmsListItem from "../FilmsListItem";
 
 class FilmsList extends PureComponent {
   render() {
     const { films } = this.props;
-    return (
-      <Fragment>
-        <h1 style={{ margin: 20 }}>Список фильмов</h1>
-        <ul className="list-group">
-          {films.map(film => (
-            <FilmsListItem
-              key={film.id}
-              classes="list-group-item list-group-item-action"
-              film={film}
-            />
-          ))}
-        </ul>
-      </Fragment>
+    return !!films.length ? (
+      <ul className="list-group">
+        {films.map(film => (
+          <FilmsListItem
+            key={film.id}
+            classes="list-group-item list-group-item-action"
+            film={film}
+          />
+        ))}
+      </ul>
+    ) : (
+      <h5>Ничего не найдено</h5>
     );
   }
 }

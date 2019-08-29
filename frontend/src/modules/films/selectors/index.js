@@ -8,3 +8,5 @@ export const getFilmId = createSelector(
   getFilm,
   film => film ? film.id : null
 );
+
+export const getSearchText = state => state.films.searchText;

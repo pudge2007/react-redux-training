@@ -1,19 +1,13 @@
 import React from "react";
 import { ConnectedRouter } from "connected-react-router";
-import { Switch, Route } from "react-router";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { SnackbarProvider } from "notistack";
+
 import { configureStore, history } from "store/configureStore";
-import PrivateRoute from "modules/common/PrivateRoute";
 import Notifications from "modules/common/Notifications";
 import Header from "modules/common/Header";
-import FilmsList from "modules/films/pages/FilmsList";
-import FilmPage from "modules/films/pages/FilmPage";
-import UserAccount from "modules/userAccount";
-import Categories from "modules/categories";
-import Ratings from "modules/ratings";
+import Main from "../Main";
 
 export const store = configureStore();
 
@@ -30,19 +24,9 @@ const App = () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <SnackbarProvider {...SnackbarProviderOptions}>
-          <div className="container">
-            <Notifications />
-
-            <Header />
-
-            <Switch>
-              <Route exact path="/" component={FilmsList} />
-              <Route path="/film/:id" component={FilmPage} />
-              <Route path="/categories" component={Categories} />
-              <Route path="/ratings" component={Ratings} />
-              <PrivateRoute path="/account" component={UserAccount} />
-            </Switch>
-          </div>
+          <Notifications />
+          <Header />
+          <Main />
         </SnackbarProvider>
       </ConnectedRouter>
     </Provider>
