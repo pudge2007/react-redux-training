@@ -1,3 +1,10 @@
-export const getIsAuthenticated = (state) => state.auth.isAuthenticated;
+import { createSelector } from "reselect";
 
-export const getUser = (state) => state.auth.user;
+export const getIsAuthenticated = state => state.auth.isAuthenticated;
+
+export const getUser = state => state.auth.user;
+
+export const getUserId = createSelector(
+  getUser,
+  user => (user ? user.id : null)
+);

@@ -5,19 +5,21 @@ import Rating from "@material-ui/lab/Rating";
 
 import * as actionCreators from "./actions";
 import * as modalActionCreators from "modules/common/ModalDialog/actions";
-import { getIsAuthenticated } from "modules/auth/selectors";
+import { getIsAuthenticated, getUserId } from "modules/auth/selectors";
 import { SIGN_IN_MODAL } from "modules/auth/pages/SignIn/constants";
 import { getIsPending } from "modules/api/selectors";
 import { getFilmId } from "modules/films/selectors";
 
 class RaitingContainer extends Component {
   onChange = (event, value) => {
-    const { isAuthenticated, modalActions } = this.props;
+    const { isAuthenticated, modalActions, filmId, userId } = this.props;
+
     if (!isAuthenticated) {
       modalActions.toggleModal(SIGN_IN_MODAL.modalName);
     } else {
       this.props.actions.setFilmRatingRequest({
-        film_id: this.props.filmId,
+        film_id: filmId,
+        user_id: userId,
         rating: value
       });
     }
@@ -34,6 +36,7 @@ class RaitingContainer extends Component {
 const mapStateToProps = state => {
   return {
     filmId: getFilmId(state),
+    userId: getUserId(state),
     isAuthenticated: getIsAuthenticated(state),
     isPending: getIsPending(state, actionCreators.setFilmRatingRequest)
   };

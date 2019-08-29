@@ -6,7 +6,9 @@ const sendErrorMessage = (err, res) =>
   });
 
 const ratingAverage = ratings => {
-  return +(ratings.map(r => r.rating).reduce((a, b) => a + b) / ratings.length).toFixed(2);
+  return +(
+    ratings.map(r => r.rating).reduce((a, b) => a + b) / ratings.length
+  ).toFixed(2);
 };
 
 exports.getFilmRatings = async film_id => {
@@ -18,17 +20,35 @@ exports.getFilmRatings = async film_id => {
   }
 };
 
+const checkIsRatingSetsByUser = async (film_id, user_id, res) => {
+  try {
+    const count = await Rating.countDocuments({ film_id, user_id });
+    return !!count;
+  } catch (err) {
+    return sendErrorMessage(err, res);
+  }
+};
+
 exports.setRating = async (req, res) => {
-  const { film_id, rating } = req.body;
+  const { film_id, user_id, rating } = req.body;
   const newRating = new Rating({
     film_id,
+    user_id,
     rating
   });
 
   try {
-    await newRating.save();
-    const filmRating = await module.exports.getFilmRatings(film_id);
-    res.json(filmRating);
+    const check = await checkIsRatingSetsByUser(film_id, user_id, res);
+
+    if (check) {
+      return res.status(400).json({
+        message: "Вы уже выставляли рейтинг этому фильму!"
+      });
+    } else {
+      await newRating.save();
+      const filmRating = await module.exports.getFilmRatings(film_id);
+      res.json(filmRating);
+    }
   } catch (err) {
     return sendErrorMessage(err, res);
   }
