@@ -1,15 +1,18 @@
-import React from "react";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import React, { Fragment } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { styles } from "./styles";
 
 const Layout = ({ isPending, children }) => (
-  <div style={styles.wrapper}>
-    {isPending && (
-      <LinearProgress style={styles.loader} color="secondary" variant="query" />
+  <Fragment>
+    {isPending ? (
+      <div style={styles.wrapper}>
+        <CircularProgress style={styles.loader} color="secondary" />
+      </div>
+    ) : (
+      <div style={styles.content}>{children}</div>
     )}
-    {children}
-  </div>
+  </Fragment>
 );
 
 export default Layout;

@@ -35,7 +35,7 @@ exports.setRating = async (req, res) => {
   const newRating = new Rating({
     film_id,
     user_id,
-    rating: rating * 2
+    rating
   });
 
   try {
@@ -49,7 +49,7 @@ exports.setRating = async (req, res) => {
       await newRating.save();
       const filmRating = await getAverageFilmRatings(film_id);
 
-      await Film.updateOne({ id: film_id }, {rating: filmRating});
+      await Film.updateOne({ id: film_id }, { rating: filmRating });
 
       res.json(filmRating);
     }

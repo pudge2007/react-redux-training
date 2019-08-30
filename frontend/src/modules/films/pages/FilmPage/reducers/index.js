@@ -1,23 +1,14 @@
-import { handleActions } from "redux-actions";
+import { combineReducers } from "redux";
 
-import * as actionCreators from "../actions";
-import * as ratingActionCreators from '../../../components/Raiting/actions';
+import film from "./film";
+import rating from "../../../components/Raiting/reducer";
+import comments from "../../../components/Comments/reducer";
 
-const defaultState = null;
 
-const reducer = handleActions(
-  {
-    [actionCreators.getFilmByIdSuccess](state, action) {
-      return action.response.data || null;
-    },
-    [ratingActionCreators.setFilmRatingSuccess](state, action) {
-      return { ...state, ...{ rating: action.response.data } };
-    },
-    [actionCreators.removeFilmState]() {
-      return defaultState;
-    }
-  },
-  defaultState
-);
+const reducer = combineReducers({
+  film,
+  rating,
+  comments
+});
 
 export default reducer;

@@ -1,6 +1,6 @@
 import { put, takeEvery } from "redux-saga/effects";
 
-import { setFilmRatingSuccess } from "../actions";
+import { addRatingSuccess } from "../actions";
 import { successNotification, removeAllNotifications } from "modules/common/Notifications/actions";
 
 function* notify() {
@@ -8,8 +8,8 @@ function* notify() {
   yield put(successNotification("Ваш рейтинг учтен!"));
 }
 
-function* watchRequest() {
-  yield takeEvery(setFilmRatingSuccess, notify);
+function* successNotify() {
+  yield takeEvery(addRatingSuccess, notify);
 }
 
-export default watchRequest;
+export default successNotify;

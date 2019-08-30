@@ -16,7 +16,7 @@ class FilmsList extends PureComponent {
         ))}
       </ul>
     ) : (
-      <h5>Ничего не найдено</h5>
+      <h5 className="text-muted">Ничего не найдено</h5>
     );
   }
 }

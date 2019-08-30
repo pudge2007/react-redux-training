@@ -1,11 +1,12 @@
 export const styles = {
   wrapper: {
-    position: 'relative',
-    paddingTop: 4
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "150px"
   },
-  loader: {
-    position: 'absolute',
-    top: 0,
-    width: '100%'
+  content: {
+    width: "100%"
   }
-}
+};

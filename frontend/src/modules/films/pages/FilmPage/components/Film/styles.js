@@ -1,16 +1,18 @@
 export const styles = {
   wrapper: {
-    backgroundColor: "#fff",
-    padding: '20px 1rem'
+    backgroundColor: "rgb(255, 255, 255)",
+    padding: 20,
+    minHeight: "calc(100vh - 116px)",
+    marginTop: 20,
+    borderRadius: "4px",
+    boxShadow: "0 0 3px rgba(0,0,0,0.15)"
   },
   film: {
-    marginBottom: 20,
     paddingBottom: 30,
     borderBottom: "1px solid #c51162"
   },
   poster: {
-    width: "100%",
-    height: "100%"
+    width: "100%"
   },
   titleWrapper: {
     display: "flex",

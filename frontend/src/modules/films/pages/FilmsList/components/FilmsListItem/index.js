@@ -12,7 +12,7 @@ const FilmsListItem = ({ film, classes }) => {
           <p style={styles.subtitle}>{film.eng}</p>
         </div>
         <div className="col-2">
-          <h3>{film.rating}</h3>
+          <h5>{film.rating}</h5>
         </div>
       </div>
     </Link>

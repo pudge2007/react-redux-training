@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { debounce } from "lodash";
@@ -29,10 +29,12 @@ class FilmsListContainer extends Component {
   render() {
     const { films, isPending, searchText } = this.props;
     return (
-      <Layout isPending={isPending}>
+      <Fragment>
         <Search onChange={this.onChange} value={searchText} />
-        <FilmsList films={films} />
-      </Layout>
+        <Layout isPending={isPending}>
+          <FilmsList films={films} />
+        </Layout>
+      </Fragment>
     );
   }
 }

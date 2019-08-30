@@ -1,6 +1,4 @@
 import { createAction } from "redux-actions";
 
-export const getFilmByIdRequest = createAction("GET_FILM_BY_ID_REQUEST");
-export const getFilmByIdSuccess = createAction("GET_FILM_BY_ID_SUCCESS");
-
-export const removeFilmState = createAction("REMOVE_FILM_STATE");
+export const getFilmRequest = createAction("GET_FILM_REQUEST");
+export const getFilmSuccess = createAction("GET_FILM_SUCCESS");
