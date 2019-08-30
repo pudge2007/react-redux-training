@@ -14,5 +14,8 @@ export const styles = {
     "&:focus, &:hover, &:visited, &:link, &:active": {
       textDecoration: "none"
     }
+  },
+  rating: {
+    margin: 0
   }
 };
