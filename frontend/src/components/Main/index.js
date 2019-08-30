@@ -6,7 +6,6 @@ import FilmsList from "modules/films/pages/FilmsList";
 import FilmPage from "modules/films/pages/FilmPage";
 import UserAccount from "modules/userAccount";
 import Categories from "modules/categories";
-import Ratings from "modules/ratings";
 import { styles } from "./styles";
 
 const Main = () => {
@@ -17,7 +16,6 @@ const Main = () => {
           <Route exact path="/" component={FilmsList} />
           <Route path="/film/:id" component={FilmPage} />
           <Route path="/categories" component={Categories} />
-          <Route path="/ratings" component={Ratings} />
           <PrivateRoute path="/account" component={UserAccount} />
         </Switch>
       </div>
