@@ -10,7 +10,7 @@ const successPostfix = "_SUCCESS";
 const failPostfix = "_FAIL";
 
 function* sendRequest(action) {
-  const callMethod = camelCase((action.type).replace(startPostfix, ""))
+  const callMethod = camelCase(action.type.replace(startPostfix, ""));
   let request = calls[callMethod];
   if (!request) {
     throw new Error(`no api method for action ${callMethod}`);

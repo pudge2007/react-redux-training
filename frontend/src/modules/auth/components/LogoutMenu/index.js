@@ -2,9 +2,12 @@ import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { styles } from "./styles";
+import { withStyles } from "@material-ui/core/styles";
 
-const LogoutMenu = ({user, onLogout }) => {
+import styles from "./styles";
+import { getUserFullName } from "utils";
+
+const LogoutMenu = ({ classes, user, onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const openMenu = event => {
@@ -16,9 +19,9 @@ const LogoutMenu = ({user, onLogout }) => {
   };
 
   return (
-    <div style={styles.wrapper}>
-      <p style={styles.name}>{user.lastName + ' ' + user.firstName}</p>
-      <AccountCircle style={styles.icon} onClick={openMenu} />
+    <div className={classes.wrapper}>
+      <p className={classes.name}>{getUserFullName(user)}</p>
+      <AccountCircle className={classes.icon} onClick={openMenu} />
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -37,4 +40,4 @@ const LogoutMenu = ({user, onLogout }) => {
   );
 };
 
-export default LogoutMenu;
+export default withStyles(styles)(LogoutMenu);

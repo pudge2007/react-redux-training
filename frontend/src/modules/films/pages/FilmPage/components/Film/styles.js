@@ -1,4 +1,4 @@
-export const styles = {
+const styles = () => ({
   wrapper: {
     backgroundColor: "rgb(255, 255, 255)",
     padding: 20,
@@ -23,4 +23,6 @@ export const styles = {
     width: "80%",
     marginRight: 30
   }
-};
+});
+
+export default styles;

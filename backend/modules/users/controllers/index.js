@@ -37,7 +37,13 @@ exports.signIn = async (req, res) => {
       },
       { login: 0, password: 0 }
     );
-    res.json(result);
+    if (!result) {
+      res.status(401).json({
+        message: "Неверные данные!"
+      });
+    } else {
+      res.json(result);
+    }
   } catch (err) {
     return sendErrorMessage(err, res);
   }

@@ -1,14 +1,15 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
 
-import { styles } from "./styles";
+import styles from "./styles";
 
-const Search = ({ value, onChange }) => {
+const Search = ({ classes, value, onChange }) => {
   return (
-    <div style={styles.searchWrapper}>
-      <h2 style={styles.title}>Список фильмов</h2>
+    <div className={classes.searchWrapper}>
+      <h2 className={classes.title}>Список фильмов</h2>
       <TextField
-        style={styles.search}
+        className={classes.search}
         label="Поиск фильма"
         value={value}
         onChange={onChange}
@@ -19,4 +20,4 @@ const Search = ({ value, onChange }) => {
   );
 };
 
-export default Search;
+export default withStyles(styles)(Search);

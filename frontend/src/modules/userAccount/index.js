@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserAccount = () => {
-  return <h1 style={{ margin: 20 }}>Личный кабинет</h1>;
+  return <h2 style={{ margin: "37px 0" }}>Личный кабинет</h2>;
 };
 
 export default UserAccount;

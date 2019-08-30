@@ -1,22 +1,23 @@
 import React, { PureComponent } from "react";
+import { withStyles } from "@material-ui/core/styles";
 
 import Rating from "../../../../components/Raiting";
 import Comments from "../../../../components/Comments";
-import { styles } from "./styles";
+import styles from "./styles";
 
 class Film extends PureComponent {
   render() {
-    const { film } = this.props;
+    const { classes, film } = this.props;
     return (
-      <div style={styles.wrapper}>
-        <div style={styles.film}>
+      <div className={classes.wrapper}>
+        <div className={classes.film}>
           <div className="row">
             <div className="col-3">
-              <img src={film.imageURI} style={styles.poster} alt="" />
+              <img src={film.imageURI} className={classes.poster} alt="" />
             </div>
             <div className="col-9">
-              <div style={styles.titleWrapper}>
-                <h1 style={styles.title}>{film.title}</h1>
+              <div className={classes.titleWrapper}>
+                <h1 className={classes.title}>{film.title}</h1>
                 <Rating />
               </div>
               <p>{film.description}</p>
@@ -29,4 +30,4 @@ class Film extends PureComponent {
   }
 }
 
-export default Film;
+export default withStyles(styles)(Film);

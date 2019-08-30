@@ -1,18 +1,19 @@
 import React, { Fragment } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { withStyles } from "@material-ui/core/styles";
 
-import { styles } from "./styles";
+import styles from "./styles";
 
-const Layout = ({ isPending, children }) => (
+const Layout = ({ classes, isPending, children }) => (
   <Fragment>
     {isPending ? (
-      <div style={styles.wrapper}>
-        <CircularProgress style={styles.loader} color="secondary" />
+      <div className={classes.wrapper}>
+        <CircularProgress className={classes.loader} color="secondary" />
       </div>
     ) : (
-      <div style={styles.content}>{children}</div>
+      <div className={classes.content}>{children}</div>
     )}
   </Fragment>
 );
 
-export default Layout;
+export default withStyles(styles)(Layout);

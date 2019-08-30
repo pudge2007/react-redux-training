@@ -2,15 +2,15 @@ import React from "react";
 import { compose } from "redux";
 import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 import TextInput from "modules/common/TextField";
 import PendingButton from "modules/common/PendingButton";
-
-import { styles } from "./styles";
+import styles from "./styles";
 
 export const required = value => (value ? undefined : "Обязательное поле!");
 
-const SignInForm = ({ handleSubmit, onCancel, valid, isPending }) => {
+const SignInForm = ({ classes, handleSubmit, onCancel, valid, isPending }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -31,7 +31,7 @@ const SignInForm = ({ handleSubmit, onCancel, valid, isPending }) => {
         validate={[required]}
       />
 
-      <div style={styles.buttonWrapper}>
+      <div className={classes.buttonWrapper}>
         <Button
           disabled={isPending}
           type="button"
@@ -45,7 +45,7 @@ const SignInForm = ({ handleSubmit, onCancel, valid, isPending }) => {
           isPending={isPending}
           disabled={!valid || isPending}
           type="submit"
-          style={styles.submitButton}
+          className={classes.submitButton}
           color="primary"
           variant="contained"
         >
@@ -56,4 +56,7 @@ const SignInForm = ({ handleSubmit, onCancel, valid, isPending }) => {
   );
 };
 
-export default compose(reduxForm())(SignInForm);
+export default compose(
+  reduxForm(),
+  withStyles(styles)
+)(SignInForm);

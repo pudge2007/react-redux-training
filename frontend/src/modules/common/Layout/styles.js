@@ -1,4 +1,4 @@
-export const styles = {
+const styles = () => ({
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -9,4 +9,6 @@ export const styles = {
   content: {
     width: "100%"
   }
-};
+});
+
+export default styles;

@@ -1,7 +1,9 @@
-export const styles = {
+const styles = () => ({
   mainBox: {
     height: "calc(100vh - 56px)",
-    overflowY: 'auto',
+    overflowY: "auto",
     paddingBottom: 40
   }
-}
+});
+
+export default styles;

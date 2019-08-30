@@ -1,4 +1,4 @@
-export const styles = {
+const styles = () => ({
   searchWrapper: {
     margin: "30px 0 20px",
     display: "flex",
@@ -11,4 +11,6 @@ export const styles = {
   search: {
     width: "300px"
   }
-};
+});
+
+export default styles;

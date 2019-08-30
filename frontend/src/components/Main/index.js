@@ -1,16 +1,17 @@
 import React from "react";
 import { Switch, Route } from "react-router";
+import { withStyles } from "@material-ui/core/styles";
 
 import PrivateRoute from "modules/common/PrivateRoute";
 import FilmsList from "modules/films/pages/FilmsList";
 import FilmPage from "modules/films/pages/FilmPage";
 import UserAccount from "modules/userAccount";
 import Categories from "modules/categories";
-import { styles } from "./styles";
+import styles from "./styles";
 
-const Main = () => {
+const Main = ({ classes }) => {
   return (
-    <div style={styles.mainBox}>
+    <div className={classes.mainBox}>
       <div className="container">
         <Switch>
           <Route exact path="/" component={FilmsList} />
@@ -23,4 +24,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default withStyles(styles)(Main);
