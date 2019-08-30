@@ -1,6 +1,8 @@
 import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SnackbarProvider } from "notistack";
 
@@ -10,6 +12,7 @@ import Header from "modules/common/Header";
 import Main from "../Main";
 
 export const store = configureStore();
+let persistor = persistStore(store);
 
 const App = () => {
   const SnackbarProviderOptions = {
@@ -22,13 +25,15 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <SnackbarProvider {...SnackbarProviderOptions}>
-          <Notifications />
-          <Header />
-          <Main />
-        </SnackbarProvider>
-      </ConnectedRouter>
+      <PersistGate persistor={persistor}>
+        <ConnectedRouter history={history}>
+          <SnackbarProvider {...SnackbarProviderOptions}>
+            <Notifications />
+            <Header />
+            <Main />
+          </SnackbarProvider>
+        </ConnectedRouter>
+      </PersistGate>
     </Provider>
   );
 };
