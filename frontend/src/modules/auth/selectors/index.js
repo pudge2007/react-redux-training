@@ -6,5 +6,5 @@ export const getUser = state => state.auth.user;
 
 export const getUserId = createSelector(
   getUser,
-  user => (user ? user.id : null)
+  user => (user ? user._id : null)
 );

@@ -8,7 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 const ModalDialog = ({ children, isOpen, onClose, title, subtitle }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} fullWidth={true}>
-      <DialogTitle>{title}</DialogTitle>
+      {title && <DialogTitle>{title}</DialogTitle>}
       <DialogContent>
         {subtitle && <DialogContentText>{subtitle}</DialogContentText>}
         {children}

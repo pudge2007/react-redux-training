@@ -9,15 +9,18 @@ const styles = () => ({
     width: "50px",
     height: "50px",
     border: "2px solid #e5e7e8",
-    borderRadius: '50%'
+    borderRadius: "50%"
   },
   commentBody: {
     marginLeft: 15
   },
   name: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginRight: 20
+  },
+  text: {
+    marginBottom: 0
   }
 });
 

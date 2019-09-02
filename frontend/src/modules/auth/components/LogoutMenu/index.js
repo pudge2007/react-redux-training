@@ -5,7 +5,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { withStyles } from "@material-ui/core/styles";
 
 import styles from "./styles";
-import { getUserFullName } from "utils";
 
 const LogoutMenu = ({ classes, user, onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,7 +19,7 @@ const LogoutMenu = ({ classes, user, onLogout }) => {
 
   return (
     <div className={classes.wrapper}>
-      <p className={classes.name}>{getUserFullName(user)}</p>
+      <p className={classes.name}>{user.login}</p>
       <AccountCircle className={classes.icon} onClick={openMenu} />
       <Menu
         anchorEl={anchorEl}

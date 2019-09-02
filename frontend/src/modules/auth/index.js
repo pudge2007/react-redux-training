@@ -1,1 +1,1 @@
-export { default } from "./pages/SignIn";
+export { default } from "./containers/AuthContainer";

@@ -7,7 +7,7 @@ const sendErrorMessage = (err, res) =>
 
 exports.getUser = async (id, res) => {
   try {
-    const user = await User.findOne({ id }, { login: 0, password: 0 });
+    const user = await User.findById(id, { password: 0 });
     return user;
   } catch (err) {
     return sendErrorMessage(err, res);
@@ -16,26 +16,27 @@ exports.getUser = async (id, res) => {
 
 exports.signUp = async (req, res) => {
   const user = req.body;
+  user.login = user.email.split('@')[0];
   const newUser = new User(user);
 
   try {
     const result = await newUser.save();
-    res.json("User added!");
+    res.json(result);
   } catch (err) {
     return sendErrorMessage(err, res);
   }
 };
 
 exports.signIn = async (req, res) => {
-  const { login, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     const result = await User.findOne(
       {
-        login,
+        email,
         password
       },
-      { login: 0, password: 0 }
+      { password: 0 }
     );
     if (!result) {
       res.status(401).json({

@@ -1,13 +1,17 @@
-import { handleActions } from "redux-actions";
+import { handleActions, combineActions } from "redux-actions";
 
 import * as signInActionCreators from "../pages/SignIn/actions";
+import * as signUpActionCreators from "../pages/SignUp/actions";
 import * as actionCreators from "../actions";
 
 const defaultState = null;
 
 export default handleActions(
   {
-    [signInActionCreators.signInSuccess](state, action) {
+    [combineActions(
+      signInActionCreators.signInSuccess,
+      signUpActionCreators.signUpSuccess
+    )](state, action) {
       return action.response.data;
     },
     [actionCreators.logout]() {

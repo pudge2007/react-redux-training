@@ -7,13 +7,13 @@ import { successNotification } from "modules/common/Notifications/actions";
 import { AUTH_MODAL } from "../../../constants";
 
 function* redirectToAccount() {
-  yield put(successNotification("Вход успешно выполнен!"));
+  yield put(successNotification("Регистрация прошла успешно!"));
   yield put(modalActionCreators.toggleModal(AUTH_MODAL.modalName));
   yield put(push("/account"));
 }
 
 function* watchRequest() {
-  yield takeEvery(actionCreators.signInSuccess, redirectToAccount);
+  yield takeEvery(actionCreators.signUpSuccess, redirectToAccount);
 }
 
 export default watchRequest;

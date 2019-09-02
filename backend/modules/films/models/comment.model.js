@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema(
   {
     film_id: { type: Number, required: true },
-    user_id: { type: Number, required: true },
+    user_id: { type: String, required: true },
     comment: { type: String, required: true }
   },
   {

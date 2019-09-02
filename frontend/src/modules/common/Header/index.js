@@ -1,62 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import Auth from "modules/auth";
 
-import SignIn from "modules/auth/pages/SignIn";
-import Logout from "modules/auth/components/LogoutMenu";
-import { getIsAuthenticated, getUser } from "modules/auth/selectors";
-import { logout } from "modules/auth/actions";
-
-class Header extends Component {
-  onLogout = () => {
-    this.props.logout();
-  };
-
-  render() {
-    const { isAuthenticated, user } = this.props;
-
-    return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <div className="container">
-          <Link to="/" className="navbar-brand">
-            Kinopoisk
-          </Link>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
-              <li className="navbar-item">
-                <Link to="/categories" className="nav-link">
-                  Категории
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {isAuthenticated ? (
-            <Logout user={user} onLogout={this.onLogout} />
-          ) : (
-            <SignIn />
-          )}
+const Header = () => {
+  return (
+    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          Kinopoisk
+        </Link>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav mr-auto">
+            <li className="navbar-item">
+              <Link to="/categories" className="nav-link">
+                Категории
+              </Link>
+            </li>
+          </ul>
         </div>
-      </nav>
-    );
-  }
-}
 
-const mapStateToProps = state => {
-  return {
-    user: getUser(state),
-    isAuthenticated: getIsAuthenticated(state)
-  };
+        <Auth />
+      </div>
+    </nav>
+  );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: bindActionCreators(logout, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default Header;

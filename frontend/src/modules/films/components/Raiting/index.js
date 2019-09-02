@@ -6,7 +6,7 @@ import Rating from "@material-ui/lab/Rating";
 import * as actionCreators from "./actions";
 import * as modalActionCreators from "modules/common/ModalDialog/actions";
 import { getIsAuthenticated, getUserId } from "modules/auth/selectors";
-import { SIGN_IN_MODAL } from "modules/auth/pages/SignIn/constants";
+import { AUTH_MODAL } from "modules/auth/constants";
 import { getIsPending } from "modules/api/selectors";
 import { getFilmId, getRating } from "modules/films/selectors";
 
@@ -21,7 +21,7 @@ class RaitingContainer extends Component {
     } = this.props;
 
     if (!isAuthenticated) {
-      modalActions.toggleModal(SIGN_IN_MODAL.modalName);
+      modalActions.toggleModal(AUTH_MODAL.modalName);
     } else {
       actions.addRatingRequest({
         film_id: filmId,

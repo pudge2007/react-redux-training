@@ -8,13 +8,13 @@ import PendingButton from "modules/common/PendingButton";
 import { email, required } from "utils/validators";
 import styles from "./styles";
 
-const SignInForm = ({ classes, handleSubmit, valid, isPending }) => {
+const SignUpForm = ({ classes, handleSubmit, valid, isPending }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
         name="email"
         component={TextInput}
-        label="E-mail"
+        label="Введите E-mail"
         margin="dense"
         variant="outlined"
         validate={[email, required]}
@@ -23,7 +23,7 @@ const SignInForm = ({ classes, handleSubmit, valid, isPending }) => {
         name="password"
         component={TextInput}
         type="password"
-        label="Пароль"
+        label="Введите пароль"
         margin="dense"
         variant="outlined"
         validate={[required]}
@@ -34,10 +34,11 @@ const SignInForm = ({ classes, handleSubmit, valid, isPending }) => {
           isPending={isPending}
           disabled={!valid || isPending}
           type="submit"
+          className={classes.submitButton}
           color="primary"
           variant="contained"
         >
-          ВОЙТИ
+          ЗАРЕГИСТРИРОВАТЬСЯ
         </PendingButton>
       </div>
     </form>
@@ -47,4 +48,4 @@ const SignInForm = ({ classes, handleSubmit, valid, isPending }) => {
 export default compose(
   reduxForm(),
   withStyles(styles)
-)(SignInForm);
+)(SignUpForm);
