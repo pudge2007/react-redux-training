@@ -10,6 +10,7 @@ export const styles = {
   },
   link: {
     color: "#000",
+    zIndex: 0,
     textDecoration: "none",
     "&:focus, &:hover, &:visited, &:link, &:active": {
       textDecoration: "none"

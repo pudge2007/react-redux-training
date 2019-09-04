@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import Film from "../components/Film";
 import * as actionCreators from "../actions";
 import { removeFilmState } from "../../../actions";
-import { getFilm } from "../../../selectors";
+import { getFilm } from "../selectors";
 import { getIsPending } from "modules/api/selectors";
 import Layout from "modules/common/Layout";
 

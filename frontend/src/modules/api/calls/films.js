@@ -1,8 +1,10 @@
 import api from "../index";
 
-export const getFilms = search => {
+export const getFilms = params => {
+  const { page, searchText: search } = params;
   return api.get("/films", {
     params: {
+      page: page,
       ...(search ? { search: search } : {})
     }
   });

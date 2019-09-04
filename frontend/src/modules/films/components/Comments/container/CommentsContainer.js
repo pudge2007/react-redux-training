@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import * as actionCreators from "../actions";
 import { getIsAuthenticated, getUserId } from "modules/auth/selectors";
 import { getIsPending } from "modules/api/selectors";
-import { getFilmId, getComments } from "modules/films/selectors";
+import { getFilmId, getComments } from "../../../pages/FilmPage/selectors";
 import { COMMENT_FORM } from "../constants";
 import CommentForm from "../components/CommentForm";
 import CommentsList from "../components/CommentsList";

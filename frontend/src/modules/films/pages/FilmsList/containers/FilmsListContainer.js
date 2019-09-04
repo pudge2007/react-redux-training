@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { debounce } from "lodash";
 
-import Layout from "modules/common/Layout";
 import FilmsList from "../components/FilmsList";
 import * as actionCreators from "../actions";
-import { getFilms, getSearchText } from "../../../selectors";
+import {
+  getFilms,
+  getTotalCount,
+  getCurrentPage,
+  getSearchText
+} from "../selectors";
 import { getIsPending } from "modules/api/selectors";
 import Search from "../components/Search";
 
@@ -17,23 +21,35 @@ class FilmsListContainer extends Component {
     this.searchFilms(value);
   };
 
-  searchFilms = debounce(value => {
-    this.props.actions.getFilmsRequest(value);
+  searchFilms = debounce(() => {
+    this.props.actions.resetFilmsState();
+    this.loadFilms();
   }, 500);
 
+  loadFilms = () => {
+    const { actions, page, searchText } = this.props;
+    actions.getFilmsRequest({ page, searchText });
+  };
+
   componentDidMount() {
-    const { actions, searchText } = this.props;
-    actions.getFilmsRequest(searchText);
+    this.loadFilms();
+  }
+
+  componentWillUnmount() {
+    this.props.actions.resetFilmsState();
   }
 
   render() {
-    const { films, isPending, searchText } = this.props;
+    const { films, total, isPending, searchText } = this.props;
     return (
       <Fragment>
         <Search onChange={this.onChange} value={searchText} />
-        <Layout isPending={isPending}>
-          <FilmsList films={films} />
-        </Layout>
+        <FilmsList
+          films={films}
+          total={total}
+          isPending={isPending}
+          onScroll={this.loadFilms}
+        />
       </Fragment>
     );
   }
@@ -42,6 +58,8 @@ class FilmsListContainer extends Component {
 const mapStateToProps = state => {
   return {
     films: getFilms(state),
+    total: getTotalCount(state),
+    page: getCurrentPage(state),
     searchText: getSearchText(state),
     isPending: getIsPending(state, actionCreators.getFilmsRequest)
   };

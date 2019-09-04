@@ -12,7 +12,7 @@ import styles from "./styles";
 const Main = ({ classes }) => {
   return (
     <div className={classes.mainBox}>
-      <div className="container">
+      <div className="container h-100">
         <Switch>
           <Route exact path="/" component={FilmsList} />
           <Route path="/film/:id" component={FilmPage} />

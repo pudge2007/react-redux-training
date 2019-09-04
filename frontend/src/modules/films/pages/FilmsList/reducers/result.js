@@ -7,7 +7,10 @@ const defaultState = [];
 const reducer = handleActions(
   {
     [actionCreators.getFilmsSuccess](state, action) {
-      return action.response.data;
+      return [...state, ...action.response.data.result];
+    },
+    [actionCreators.resetFilmsState]() {
+      return defaultState;
     }
   },
   defaultState

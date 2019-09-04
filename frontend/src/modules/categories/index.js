@@ -1,11 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 const Categories = () => {
-  return (
-    <Fragment>
-      <h2 style={{ margin: "37px 0" }}>Категории</h2>
-    </Fragment>
-  );
+  return <h2>Категории</h2>;
 };
 
 export default Categories;

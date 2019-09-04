@@ -5,12 +5,23 @@ const sendErrorMessage = (err, res) =>
     message: err.message || err
   });
 
+const PER_PAGE = 15;
+
 exports.getFilms = async (req, res) => {
-  const { search } = req.query;
+  const { page, search } = req.query;
   const query = search ? { title: { $regex: search, $options: "i" } } : {};
+
   try {
-    const films = await Film.find(query);
-    res.json(films);
+    const [total, result] = await Promise.all([
+      await Film.countDocuments(query),
+      await Film.find(query)
+        .limit(PER_PAGE)
+        .skip(PER_PAGE * page)
+    ]);
+    res.json({
+      result,
+      total
+    });
   } catch (err) {
     return sendErrorMessage(err, res);
   }

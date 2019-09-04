@@ -8,7 +8,7 @@ import * as modalActionCreators from "modules/common/ModalDialog/actions";
 import { getIsAuthenticated, getUserId } from "modules/auth/selectors";
 import { AUTH_MODAL } from "modules/auth/constants";
 import { getIsPending } from "modules/api/selectors";
-import { getFilmId, getRating } from "modules/films/selectors";
+import { getFilmId, getRating } from "../../pages/FilmPage/selectors";
 
 class RaitingContainer extends Component {
   onChange = (event, value) => {
