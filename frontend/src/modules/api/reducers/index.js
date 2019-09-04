@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-
+import { omit } from "lodash";
 import * as actionCreators from "../actions";
 
 const defaultState = {};
@@ -12,9 +12,7 @@ const reducer = handleActions(
         : { ...state, [payload]: true };
     },
     [actionCreators.removeIsPending](state, { payload }) {
-      return state[payload]
-        ? { ...state, ...{ [payload]: false } }
-        : { ...state, [payload]: false };
+      return omit(state, payload);
     }
   },
   defaultState
