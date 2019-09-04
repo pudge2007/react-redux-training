@@ -1,20 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { debounce } from "lodash";
 import TextField from "@material-ui/core/TextField";
 
-const Search = ({ value, onChange }) => {
-  return (
-    <div className="d-flex justify-content-between align-items-center mb-4">
-      <h2 className="m-0">Список фильмов</h2>
+import * as actionCreators from "../../actions";
+import { getSearchText } from "../../selectors";
+
+class Search extends Component {
+  onChange = e => {
+    const { value } = e.target;
+    this.props.actions.setSearchText(value);
+    this.search();
+  };
+
+  search = debounce(() => {
+    const { actions, onSearch } = this.props;
+    actions.resetFilmsState();
+    onSearch();
+  }, 500);
+
+  render() {
+    const { searchText } = this.props;
+    return (
       <TextField
-        className="w-25"
+        className="w-100"
         label="Поиск фильма"
-        value={value}
-        onChange={onChange}
+        value={searchText}
+        onChange={this.onChange}
         margin="dense"
         variant="outlined"
       />
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    searchText: getSearchText(state)
+  };
 };
 
-export default Search;
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);

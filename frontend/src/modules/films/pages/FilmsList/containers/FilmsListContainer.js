@@ -1,34 +1,23 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { debounce } from "lodash";
 
+import FilmListHeader from "../components/FilmListHeader";
 import FilmsList from "../components/FilmsList";
 import * as actionCreators from "../actions";
 import {
   getFilms,
   getTotalCount,
   getCurrentPage,
-  getSearchText
+  getSearchText,
+  getSortDirection
 } from "../selectors";
 import { getIsPending } from "modules/api/selectors";
-import Search from "../components/Search";
 
 class FilmsListContainer extends Component {
-  onChange = e => {
-    const { value } = e.target;
-    this.props.actions.setSearchText(value);
-    this.searchFilms(value);
-  };
-
-  searchFilms = debounce(() => {
-    this.props.actions.resetFilmsState();
-    this.loadFilms();
-  }, 500);
-
   loadFilms = () => {
-    const { actions, page, searchText } = this.props;
-    actions.getFilmsRequest({ page, searchText });
+    const { actions, page, sort, searchText } = this.props;
+    actions.getFilmsRequest({ page, sort, searchText });
   };
 
   componentDidMount() {
@@ -40,10 +29,10 @@ class FilmsListContainer extends Component {
   }
 
   render() {
-    const { films, total, isPending, searchText } = this.props;
+    const { films, total, isPending } = this.props;
     return (
       <Fragment>
-        <Search onChange={this.onChange} value={searchText} />
+        <FilmListHeader event={this.loadFilms} />
         <FilmsList
           films={films}
           total={total}
@@ -61,6 +50,7 @@ const mapStateToProps = state => {
     total: getTotalCount(state),
     page: getCurrentPage(state),
     searchText: getSearchText(state),
+    sort: getSortDirection(state),
     isPending: getIsPending(state, actionCreators.getFilmsRequest)
   };
 };

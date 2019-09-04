@@ -8,7 +8,7 @@ const sendErrorMessage = (err, res) =>
 const PER_PAGE = 15;
 
 exports.getFilms = async (req, res) => {
-  const { page, search } = req.query;
+  const { page, sort, search } = req.query;
   const query = search ? { title: { $regex: search, $options: "i" } } : {};
 
   try {
@@ -17,6 +17,7 @@ exports.getFilms = async (req, res) => {
       await Film.find(query)
         .limit(PER_PAGE)
         .skip(PER_PAGE * page)
+        .sort({ rating: sort || "DESC" })
     ]);
     res.json({
       result,

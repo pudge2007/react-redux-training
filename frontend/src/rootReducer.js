@@ -18,7 +18,7 @@ const rootPersistConfig = {
 const filmsPersistConfig = {
   key: "films",
   storage: storage,
-  whitelist: ["searchText"]
+  whitelist: ["searchText", "sortDirection"]
 };
 
 const rootReducer = history =>

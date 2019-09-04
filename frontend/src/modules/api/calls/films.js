@@ -1,10 +1,11 @@
 import api from "../index";
 
 export const getFilms = params => {
-  const { page, searchText: search } = params;
+  const { page, sort, searchText: search } = params;
   return api.get("/films", {
     params: {
       page: page,
+      ...(sort ? { sort: sort } : {}),
       ...(search ? { search: search } : {})
     }
   });
